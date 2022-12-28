@@ -1,10 +1,12 @@
-//! Requires chromedriver running on port 9515:
-//!
-//!     chromedriver --port=9515 (also confirm that the version is suitable with your browser)
-//!
-//! Run as follows:
-//!
-//!     cargo run --example github-auto-issue-writer
+/*
+This little utility project is based on the rust thirtyfour cargo by stevepryde.
+
+To run the program (using google chrome)
+    1. fix the parameters such as username, password, github id, csv file to your usage
+    2. run `chromedriver.exe` in one terminal. make sure the version is compatible with the browser
+    3. in another terminal run `cargo run --example github-auto-issue-writer`
+*/
+
 
 use thirtyfour::prelude::*;
 use tokio;
@@ -40,7 +42,6 @@ async fn main() -> color_eyre::Result<()> {
 
     let elem_button = driver.find(By::ClassName("btn")).await?;
     elem_button.click().await?;
-    tokio::time::sleep(Duration::from_secs(10000)).await;
     
     // csv file to string
     let foo: String = fs::read_to_string("homework_comments.csv")?.parse()?;
